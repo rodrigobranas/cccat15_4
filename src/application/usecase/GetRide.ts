@@ -14,26 +14,34 @@ export default class GetRide {
 		if (!passenger) throw new Error("Passenger not found");
 		return {
 			passengerId: ride.passengerId,
+			driverId: ride.getDriverId(),
 			rideId: ride.rideId,
-			fromLat: ride.fromLat,
-			fromLong: ride.fromLong,
-			toLat: ride.toLat,
-			toLong: ride.toLong,
-			status: ride.status,
+			fromLat: ride.getFromLat(),
+			fromLong: ride.getFromLong(),
+			toLat: ride.getToLat(),
+			toLong: ride.getToLong(),
+			status: ride.getStatus(),
+			lastLat: ride.getLastLat(),
+			lastLong: ride.getLastLong(),
+			distance: ride.getDistance(),
 			date: ride.date,
-			passengerName: passenger.name
+			passengerName: passenger.getName()
 		}
 	}
 }
 
 type Output = {
 	passengerId: string,
+	driverId?: string,
 	rideId: string,
 	fromLat: number,
 	fromLong: number,
 	toLat: number,
 	toLong: number,
 	status: string,
+	lastLat: number,
+	lastLong: number,
+	distance: number,
 	date: Date,
 	passengerName: string
 }

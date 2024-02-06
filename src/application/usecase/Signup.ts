@@ -1,5 +1,5 @@
 import MailerGateway from "../../infra/gateway/MailerGateway";
-import Account from "../../domain/Account";
+import Account from "../../domain/entity/Account";
 import AccountRepository from "../../infra/repository/AccountRepository";
 
 // Use case
@@ -13,7 +13,7 @@ export default class Signup {
 		if (existingAccount) throw new Error("Account already exists");
 		const account = Account.create(input.name, input.email, input.cpf, input.isPassenger, input.isDriver, input.carPlate);
 		await this.accountRepository.save(account);
-		await this.mailerGateway.send("Welcome", account.email, "Use this link to confirm your account");
+		await this.mailerGateway.send("Welcome", account.getEmail(), "Use this link to confirm your account");
 		return {
 			accountId: account.accountId
 		};
